@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, data):
-        self.head = data
-        self.next = None
+        self.data = data
+        self.next_element = None
 
 class LinkedList:
     def __init__(self):
@@ -25,21 +25,29 @@ class LinkedList:
         # check if there's no node in the list
         if self.check_empty():
             self.head_node = new_node
-            # return
-        else:
-            self.currentNode == self.head_node
-            while self.currentNode.next is not None:
-                self.currentNode = self.currentNode.next
-        self.currentNode.next = newNode
-    
+            return
+
+        current_node = self.head_node
+        while current_node.next_element is not None:
+            current_node = current_node.next_element
+        current_node.next_element = new_node
+        return
+
     ##############################
     def insert_at_head(self, value):
-        if self.head_node is None:
-            self.head_node == Node(value)
-        else:
-            self.head_node.next = self.head_node
-            self.head_node = Node(value)
-        self.printList()
+        temp_node = Node(value)
+        temp_node.next_element = self.head_node
+        self.head_node = temp_node
+        return self.head_node
+
+        # new_node = Node(value)
+        # if self.head_node == None:
+        #     self.head_node = new_node
+        # else:
+        #     self.head_node.next_element = self.head_node
+        #     self.head_node = new_node
+        # return self.head_node
+
 
     ##############################
     # search the list for a value
@@ -51,21 +59,67 @@ class LinkedList:
             print("Found!")
             return True
         else: 
-            currentNode = head_node
-            while currentNode.next is not None:
-                currentNode = currentNode.next
+            currentNode = self.head_node
+            while currentNode.next_element is not None:
+                currentNode = currentNode.next_element
                 if currentNode == value:
                     print("Found!")
                     return True
 
+    ##############################
+    # insert a node at a given index
     def insert_at_idx(self, idx, value):
         pass
-
     
-    def delete_at_start(self, value):
-        pass
+    ##############################
+    # delete a node by value in the list
+    def delete_by_value(self, value): # O(n)
+        deleted = False
+        if self.head_node is None:
+            print("List is empty")
+            return deleted
 
-    def delete_idx(self, idx, value):
+        current_node = self.head_node
+        previous_node = None
+
+        if current_node.data == value:
+            self.delete_at_head()
+            deleted = True
+            return deleted
+
+        # Traversing and Searching for the Node to Delete
+        while current_node is not None:
+            # Node to delete is found
+            if current_node.data == value:
+                # previous node now points to next node
+                previous_node.next_element = current_node.next_element
+                current_node.next_element = None
+                deleted = True
+                break
+            previous_node = current_node
+            current_node = current_node.next_element
+        
+        if deleted == False:
+            print(str(value) + " is not in list!")
+        else:
+            print(str(value) + " deleted!")
+
+        self.printList()
+        return deleted
+            
+        
+
+    def delete_at_head(self):
+        first_node = self.head_node
+        if first_node == None:
+            print("List is empty!")
+        else:
+            self.head_node = first_node.next_element
+            first_node.next_element = None
+        return
+
+
+    def delete_by_idx(self, idx, value):
         pass
 
     def delete_at_tail(self):
@@ -105,18 +159,27 @@ class LinkedList:
         pass
     
     def printList(self):
+        currentNode = self.head_node
         # check if list is empty
-        if self.head_node is None:
+        if self.head_node == None:
             print("List is empty")
             return False
-        currentNode = self.head_node
         else:
-            while currentNode.next is not None:
+            while currentNode.next_element is not None:
                 print(currentNode.data, end=" -> ")
-                currentNode = currentNode.next
-        print(currentNode, end=" -> ")
+                currentNode = currentNode.next_element
+            print(currentNode.data, end=" -> ")
         return True
 
-if __name__ == __main__:
+def main():
     lst = LinkedList()
+    lst.insert_at_head(1)
     lst.insert_at_head(4)
+    lst.insert_at_head(3)
+    lst.insert_at_head(2)
+    lst.printList()
+    lst.delete_by_value(2)
+    lst.printList()
+
+if __name__ == "__main__":
+    main()
