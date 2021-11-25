@@ -19,7 +19,7 @@ class LinkedList:
             return False
 
     ##############################
-    def insert_at_tail(self, value):
+    def insert_at_tail(self, value): # O(n)
         # create a node
         new_node = Node(value)
         # check if there's no node in the list
@@ -31,14 +31,37 @@ class LinkedList:
             while self.currentNode.next is not None:
                 self.currentNode = self.currentNode.next
         self.currentNode.next = newNode
+    
+    ##############################
+    def insert_at_head(self, value):
+        if self.head_node is None:
+            self.head_node == Node(value)
+        else:
+            self.head_node.next = self.head_node
+            self.head_node = Node(value)
+        self.printList()
 
+    ##############################
+    # search the list for a value
+    def search(self, value): # O(n)
+        if self.head_node == None:
+            print("List is empty")    
+            return False
+        elif self.head_node == value:
+            print("Found!")
+            return True
+        else: 
+            currentNode = head_node
+            while currentNode.next is not None:
+                currentNode = currentNode.next
+                if currentNode == value:
+                    print("Found!")
+                    return True
 
     def insert_at_idx(self, idx, value):
         pass
 
-    def insert_at_start(self, value):
-        pass
-
+    
     def delete_at_start(self, value):
         pass
 
@@ -94,3 +117,6 @@ class LinkedList:
         print(currentNode, end=" -> ")
         return True
 
+if __name__ == __main__:
+    lst = LinkedList()
+    lst.insert_at_head(4)
