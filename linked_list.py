@@ -71,6 +71,16 @@ class LinkedList:
     def insert_at_idx(self, idx, value):
         pass
     
+    def find_length(self):
+        counter = 0
+        if self.head_node == None:
+            return 0
+        current_node = self.head_node
+        while current_node:
+            counter += 1
+            current_node = current_node.next_element
+        return counter
+
     ##############################
     # delete a node by value in the list
     def delete_by_value(self, value): # O(n)
@@ -168,7 +178,7 @@ class LinkedList:
             while currentNode.next_element is not None:
                 print(currentNode.data, end=" -> ")
                 currentNode = currentNode.next_element
-            print(currentNode.data, end=" -> ")
+            print(currentNode.data, end=" -> \n")
         return True
 
 def main():
@@ -177,9 +187,11 @@ def main():
     lst.insert_at_head(4)
     lst.insert_at_head(3)
     lst.insert_at_head(2)
+    lst.insert_at_head(5)
+    # lst.printList()
+    # lst.delete_by_value(2)
     lst.printList()
-    lst.delete_by_value(2)
-    lst.printList()
+    print(lst.find_length())
 
 if __name__ == "__main__":
     main()
