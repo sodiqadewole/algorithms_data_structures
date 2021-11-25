@@ -81,4 +81,16 @@ class LinkedList:
     def reverse(self):
         pass
     
-    def
+    def printList(self):
+        # check if list is empty
+        if self.head_node is None:
+            print("List is empty")
+            return False
+        currentNode = self.head_node
+        else:
+            while currentNode.next is not None:
+                print(currentNode.data, end=" -> ")
+                currentNode = currentNode.next
+        print(currentNode, end=" -> ")
+        return True
+
