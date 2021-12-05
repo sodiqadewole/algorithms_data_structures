@@ -57,7 +57,7 @@ def binarySearch(nums, target, leftmost):
         left = mid
     elif nums[mid] < target:
       # there is no sense to search in the left half of the array
-      left = mid;
+      left = mid
     else:
       # there is no sense to search in the right half of the array
       right = mid
