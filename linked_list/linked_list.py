@@ -40,15 +40,6 @@ class LinkedList:
         self.head_node = temp_node
         return self.head_node
 
-        # new_node = Node(value)
-        # if self.head_node == None:
-        #     self.head_node = new_node
-        # else:
-        #     self.head_node.next_element = self.head_node
-        #     self.head_node = new_node
-        # return self.head_node
-
-
     ##############################
     # search the list for a value
     def search(self, value): # O(n)
